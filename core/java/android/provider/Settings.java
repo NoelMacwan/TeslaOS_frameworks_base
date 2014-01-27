@@ -3477,6 +3477,14 @@ public final class Settings {
         public static final String STATUS_BAR_SHOW_BATTERY_PERCENT = "status_bar_show_battery_percent";
 
         /**
+         * Visibility of SIM icons of unpopulated SIM slots in MSIM mode
+         * 0: Hide unpopulated SIM icons
+         * 1: Show unpopulated SIM icons
+         * @hide
+         */
+        public static final String STATUS_BAR_MSIM_SHOW_EMPTY_ICONS = "status_bar_show_empty_sims";
+
+        /**
          * Enable statusbar double tap gesture on to put device to sleep
          * @hide
          */
@@ -4049,6 +4057,8 @@ public final class Settings {
             MOVED_TO_LOCK_SETTINGS.add(Secure.LOCK_PATTERN_SIZE);
             MOVED_TO_LOCK_SETTINGS.add(Secure.LOCK_DOTS_VISIBLE);
             MOVED_TO_LOCK_SETTINGS.add(Secure.LOCK_SHOW_ERROR_PATH);
+            MOVED_TO_LOCK_SETTINGS.add(Secure.LOCK_GESTURE_ENABLED);
+            MOVED_TO_LOCK_SETTINGS.add(Secure.LOCK_GESTURE_VISIBLE);
 
             MOVED_TO_GLOBAL = new HashSet<String>();
             MOVED_TO_GLOBAL.add(Settings.Global.ADB_ENABLED);
@@ -4839,6 +4849,18 @@ public final class Settings {
          * @hide
          */
         public static final String LOCK_SHOW_ERROR_PATH = "lock_pattern_show_error_path";
+
+        /**
+         * Whether autolock is enabled (0 = false, 1 = true)
+         * @hide
+         */
+        public static final String LOCK_GESTURE_ENABLED = "lock_gesture_autolock";
+
+        /**
+         * Whether lock gesture is visible as user enters (0 = false, 1 = true)
+         * @hide
+         */
+        public static final String LOCK_GESTURE_VISIBLE = "lock_gesture_visible_pattern";
 
         /**
          * This preference allows the device to be locked given time after screen goes off,
