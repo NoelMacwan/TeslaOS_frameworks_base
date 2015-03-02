@@ -2587,7 +2587,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String blackListValues = mContext.getResources()
                 .getString(R.string.def_heads_up_notification_blacklist_values);
         if (!TextUtils.isEmpty(dndValues)) {
-            loadSetting(stmt, Settings.TESLA.HEADS_UP_NOTIFICATION, "0");
             loadSetting(stmt, Settings.TESLA.HEADS_UP_CUSTOM_VALUES, dndValues);
             loadSetting(stmt, Settings.TESLA.HEADS_UP_BLACKLIST_VALUES, blackListValues);
         }
