@@ -466,8 +466,8 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
                     Settings.System.NAVBAR_LEFT_IN_LANDSCAPE), false, this, UserHandle.USER_ALL);
             resolver.registerContentObserver(Settings.Secure.getUriFor(
                     Settings.Secure.RECENTS_LONG_PRESS_ACTIVITY), false, this);
-            resolver.registerContentObserver(Settings.TESLA.getUriFor(
-                    Settings.TESLA.HEADS_UP_NOTIFCATION_DECAY), false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.PAC.getUriFor(
+                    Settings.TESLA.HEADS_UP_NOTIFICATION_DECAY), false, this, UserHandle.USER_ALL);
             update();
         }
 
@@ -492,7 +492,7 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
 
             mHeadsUpNotificationDecay = Settings.TESLA.getIntForUser(
                             mContext.getContentResolver(),
-                            Settings.TESLA.HEADS_UP_NOTIFCATION_DECAY,
+                            Settings.TESLA.HEADS_UP_NOTIFICATION_DECAY,
                             mContext.getResources().getInteger(
                             R.integer.heads_up_notification_decay),
                             UserHandle.USER_CURRENT);
@@ -986,7 +986,7 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
 
             mHeadsUpNotificationDecay = Settings.TESLA.getIntForUser(
                     mContext.getContentResolver(),
-                    Settings.TESLA.HEADS_UP_NOTIFCATION_DECAY,
+                    Settings.TESLA.HEADS_UP_NOTIFICATION_DECAY,
                     res.getInteger(R.integer.heads_up_notification_decay),
                     UserHandle.USER_CURRENT);
         }
