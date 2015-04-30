@@ -71,6 +71,7 @@ public class SettingsProvider extends ContentProvider {
     private static final String TABLE_GLOBAL = "global";
     private static final String TABLE_FAVORITES = "favorites";
     private static final String TABLE_OLD_FAVORITES = "old_favorites";
+    private static final String TABLE_TESLA = "tesla";
 
     private static final String[] COLUMN_VALUE = new String[] { "value" };
 
@@ -80,6 +81,8 @@ public class SettingsProvider extends ContentProvider {
     private static final SparseArray<SettingsCache> sSystemCaches
             = new SparseArray<SettingsCache>();
     private static final SparseArray<SettingsCache> sSecureCaches
+            = new SparseArray<SettingsCache>();
+   private static final SparseArray<SettingsCache> sTESLACaches
             = new SparseArray<SettingsCache>();
     private static final SettingsCache sGlobalCache = new SettingsCache(TABLE_GLOBAL);
 
@@ -192,7 +195,7 @@ public class SettingsProvider extends ContentProvider {
                     throw new IllegalArgumentException("Bad root path: " + this.table);
                 }
                 if (TABLE_SYSTEM.equals(this.table) || TABLE_SECURE.equals(this.table) ||
-                    TABLE_GLOBAL.equals(this.table)) {
+                    TABLE_GLOBAL.equals(this.table) || TABLE_TESLA.equals(this.table)) {
                     this.where = Settings.NameValueTable.NAME + "=?";
                     final String name = url.getPathSegments().get(1);
                     this.args = new String[] { name };
@@ -239,7 +242,8 @@ public class SettingsProvider extends ContentProvider {
         String table = tableUri.getPathSegments().get(0);
         if (TABLE_SYSTEM.equals(table) ||
                 TABLE_SECURE.equals(table) ||
-                TABLE_GLOBAL.equals(table)) {
+                TABLE_GLOBAL.equals(table) ||
+                TABLE_TESLA.equals(table)) {
             String name = values.getAsString(Settings.NameValueTable.NAME);
             return Uri.withAppendedPath(tableUri, name);
         } else {
@@ -267,6 +271,9 @@ public class SettingsProvider extends ContentProvider {
             backedUpDataChanged = true;
         } else if (table.equals(TABLE_SECURE)) {
             property = Settings.Secure.SYS_PROP_SETTING_VERSION;
+            backedUpDataChanged = true;
+        } else if (table.equals(TABLE_TESLA)) {
+            property = Settings.TESLA.SYS_PROP_SETTING_VERSION;
             backedUpDataChanged = true;
         } else if (isGlobal) {
             property = Settings.Global.SYS_PROP_SETTING_VERSION;    // this one is global
@@ -411,6 +418,7 @@ public class SettingsProvider extends ContentProvider {
             mOpenHelpers.delete(userHandle);
             sSystemCaches.delete(userHandle);
             sSecureCaches.delete(userHandle);
+            sTESLACaches.delete(userHandle);
             sKnownMutationsInFlight.delete(userHandle);
             onProfilesChanged();
         }
@@ -456,6 +464,7 @@ public class SettingsProvider extends ContentProvider {
 
                 sSystemCaches.append(userHandle, new SettingsCache(TABLE_SYSTEM));
                 sSecureCaches.append(userHandle, new SettingsCache(TABLE_SECURE));
+                sTESLACaches.append(userHandle, new SettingsCache(TABLE_TESLA));
                 sKnownMutationsInFlight.append(userHandle, new AtomicInteger(0));
             }
         }
@@ -517,6 +526,7 @@ public class SettingsProvider extends ContentProvider {
         }
         fullyPopulateCache(dbHelper, TABLE_SECURE, sSecureCaches.get(userHandle));
         fullyPopulateCache(dbHelper, TABLE_SYSTEM, sSystemCaches.get(userHandle));
+        fullyPopulateCache(dbHelper, TABLE_TESLA, sTESLACaches.get(userHandle));
     }
 
     // Slurp all values (if sane in number & size) into cache.
@@ -638,6 +648,9 @@ public class SettingsProvider extends ContentProvider {
         if (TABLE_SECURE.equals(tableName)) {
             return getOrConstructCache(callingUser, sSecureCaches);
         }
+        if (TABLE_TESLA.equals(tableName)) {
+            return getOrConstructCache(callingUser, sTESLACaches);
+        }
         if (TABLE_GLOBAL.equals(tableName)) {
             return sGlobalCache;
         }
@@ -734,6 +747,12 @@ public class SettingsProvider extends ContentProvider {
             return lookupValue(getOrEstablishDatabase(UserHandle.USER_OWNER), TABLE_GLOBAL,
                     sGlobalCache, request);
         }
+        if (Settings.CALL_METHOD_GET_TESLA.equals(method)) {
+            if (LOCAL_LOGV) Slog.v(TAG, "call(tesla:" + request + ") for " + callingUser);
+            dbHelper = getOrEstablishDatabase(callingUser);
+            cache = sTESLACaches.get(callingUser);
+            return lookupValue(dbHelper, TABLE_TESLA, cache, request);
+        }
 
         // Put methods - new value is in the args bundle under the key named by
         // the Settings.NameValueTable.VALUE static.
@@ -829,6 +848,9 @@ public class SettingsProvider extends ContentProvider {
                         + callingUser);
             }
             insertForUser(Settings.Global.CONTENT_URI, values, callingUser);
+        } else if (Settings.CALL_METHOD_PUT_TESLA.equals(method)) {
+            if (LOCAL_LOGV) Slog.v(TAG, "call_put(tesla:" + request + "=" + newValue + ") for " + callingUser);
+            insertForUser(Settings.TESLA.CONTENT_URI, values, callingUser);
         } else {
             Slog.w(TAG, "call() with invalid method: " + method);
         }
