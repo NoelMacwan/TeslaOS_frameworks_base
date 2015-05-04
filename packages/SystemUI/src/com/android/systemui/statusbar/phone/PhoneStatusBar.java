@@ -466,7 +466,7 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
                     Settings.System.NAVBAR_LEFT_IN_LANDSCAPE), false, this, UserHandle.USER_ALL);
             resolver.registerContentObserver(Settings.Secure.getUriFor(
                     Settings.Secure.RECENTS_LONG_PRESS_ACTIVITY), false, this);
-            resolver.registerContentObserver(Settings.PAC.getUriFor(
+            resolver.registerContentObserver(Settings.TESLA.getUriFor(
                     Settings.TESLA.HEADS_UP_NOTIFICATION_DECAY), false, this, UserHandle.USER_ALL);
             update();
         }
