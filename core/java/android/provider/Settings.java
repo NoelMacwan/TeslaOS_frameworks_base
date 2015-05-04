@@ -8004,13 +8004,6 @@ public final class Settings {
         /** @hide */ public static final int HEADS_UP_ON = 1;
 
         /**
-         * Defines the status and navigation bar color is battery safe mode is enabled.
-         *
-         * @hide
-         */
-        public static final String BATTERY_SAVER_MODE_COLOR = "battery_save_mode_color";
-
-        /**
          * The name of the device
          *
          * @hide
