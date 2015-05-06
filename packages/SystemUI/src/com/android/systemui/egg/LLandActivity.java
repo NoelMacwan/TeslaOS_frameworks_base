@@ -28,8 +28,8 @@ public class LLandActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        final boolean isCM = getIntent().getBooleanExtra("is_cm", false);
-        setContentView(isCM ? R.layout.cmland : R.layout.lland);
+        final boolean isTESLA = getIntent().getBooleanExtra("is_tesla", false);
+        setContentView(isTESLA ? R.layout.teslaland : R.layout.lland);
         mLand = (LLand) findViewById(R.id.world);
         mLand.setScoreField((TextView) findViewById(R.id.score));
         mLand.setSplash(findViewById(R.id.welcome));
