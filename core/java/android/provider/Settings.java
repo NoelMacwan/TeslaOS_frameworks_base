@@ -3662,6 +3662,13 @@ public final class Settings {
         public static final String ANIMATION_CONTROLS_REVERSE_EXIT = "animation_controls_reverse_exit";
 
         /**
+         * The statusbar configuration to be used for its creation in SystemUI
+         * Fallback is the config_statusBarComponent value
+         * @hide
+         */
+        public static final String STATUSBAR_COMPONENT = "statusbar_component";
+
+        /**
          * Settings to backup. This is here so that it's in the same place as the settings
          * keys and easy to update.
          *
