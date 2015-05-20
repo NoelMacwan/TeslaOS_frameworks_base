@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Copyright (C) 2015 The Tesla OS
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+         http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="560dp"
+    android:height="560dp"
+    android:viewportWidth="560"
+    android:viewportHeight="560">
+
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M101.977,243.257H71.798v-9.375h70.63v9.375H112.25v80.518h-10.273V243.257z" />
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M161.438,233.883h64.979v9.246h-54.834v30.692h49.056v9.246h-49.056v31.463h55.477v9.246h-65.622V233.883z" />
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M241.575,310.677l6.292-7.448c9.375,8.476,18.364,12.713,30.82,12.713c12.071,0,20.034-6.42,20.034-15.281
+v-0.257c0-8.347-4.495-13.099-23.373-17.079c-20.675-4.495-30.178-11.173-30.178-25.941v-0.257
+c0-14.126,12.457-24.528,29.536-24.528c13.099,0,22.474,3.724,31.591,11.044l-5.907,7.833c-8.347-6.806-16.694-9.76-25.94-9.76
+c-11.686,0-19.134,6.421-19.134,14.511v0.257c0,8.476,4.623,13.227,24.399,17.465c20.034,4.366,29.28,11.686,29.28,25.427v0.257
+c0,15.41-12.842,25.427-30.692,25.427C264.048,325.06,252.362,320.309,241.575,310.677z" />
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M329.675,233.883h10.145V314.4h50.597v9.375h-60.741V233.883z" />
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M442.428,233.241h9.503l40.965,90.535H481.98l-10.53-23.758h-48.928l-10.658,23.758h-10.402
+L442.428,233.241z M467.47,290.9l-20.419-45.845L426.504,290.9H467.47z" />
+</vector>
